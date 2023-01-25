@@ -1,14 +1,17 @@
 <div class="section-one">
     <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center" id="submit-alert"></div>
+        </div>
         <div class="d-flex justify-content-center">
             <div class="card border-0 shadow-lg p-3" style="border-radius: 32px; width: 1000px; margin-top: 64px;">
                 <div class="card-body">
                     <h2 class="fw-bold text-center mt-3 mb-2">Tambah Lowongan</h2>
                     <div class="progress mx-5 mb-5">
-                        <div class="progress-bar" role="progressbar" style="width: 9%; font-size: 8pt;" aria-valuemin="0" aria-valuemax="100">0%</div>
+                        <div class="progress-bar" role="progressbar" style="width: 16.7%; font-size: 8pt;" aria-valuemin="1" aria-valuemax="6">1/6</div>
                     </div>
-                    <form id="form-add-vacancy" novalidate>
-                        <div id="vacancy">
+                    <div id="vacancy">
+                        <form id="form-add-vacancy" novalidate>
                             <div class="row justify-content-center">
                                 <div class="col-md-10">
                                     <div class="row mt-2 mb-3 justify-content-center">
@@ -101,14 +104,17 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- BUTTON NEXT -->
-                            <div class="d-flex justify-content-between mx-3 mt-5">
-                                <button class="btn btn-secondary rounded-5 text-white" id="btn-back-home"><i class="bi bi-arrow-left"></i> Back to Prev. Page</button>
-                                <button class="btn btn-mockup rounded-5 text-white" type="submit" id="btn-next-vacancy">Next <i class="bi bi-arrow-right"></i></button>
+                        </form>
+                        <div class="row justify-content-center">
+                            <div class="col-md-11">
+                                <!-- BUTTON NEXT -->
+                                <div class="d-flex justify-content-between mt-3">
+                                    <button class="btn btn-secondary rounded-5 text-white" id="btn-back-home"><i class="bi bi-arrow-left"></i> Back to Home Page</button>
+                                    <button form="form-add-vacancy" class="btn btn-mockup rounded-5 text-white" type="submit" id="btn-next-vacancy">Next <i class="bi bi-arrow-right"></i></button>
+                                </div>
                             </div>
                         </div>
-                    </form>
+                    </div>
 
                     <form id="form-add-persyaratan" novalidate>
                         <div id="persyaratan">
@@ -202,51 +208,12 @@
                                                 </label>
                                                 <select form="form-add-persyaratan" name="vaksin" id="input-vaksin" class="form-select rounded-3" style="margin-top: -16px;" required>
                                                     <option value="">-Pilih Dosis-</option>
-                                                    <option value="dosis1">Dosis 1</option>
-                                                    <option value="dosis2">Dosis 2</option>
-                                                    <option value="booster">Dosis Booster</option>
+                                                    <option value="Dosis 1">Dosis 1</option>
+                                                    <option value="Dosis 2">Dosis 2</option>
+                                                    <option value="Dosis Booster">Dosis Booster</option>
                                                 </select>
                                                 <div class="invalid-feedback">
                                                     Dosis Vaksinasi belum dipilih
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <!-- PENGALAMAN -->
-                                            <div class="col-md-5 mb-3">
-                                                <label for="pengalaman">
-                                                    <p class="fw-bold">Pengalaman Kerja</p>
-                                                </label>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="input-group" style="margin-top: -16px;">
-                                                            <input form="form-add-persyaratan" type="number" name="pengalaman" id="input-min-pengalaman" class="form-control" style="border-radius: 10px 0px 0px 10px;" placeholder="Min." required>
-                                                            <span class="input-group-text" id="basic-addon2" style="border-radius: 0px 10px 10px 0px;">Thn</span>
-                                                            <div class="invalid-feedback">
-                                                                Minimum Pengalaman belum diisi
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="input-group" style="margin-top: -16px;">
-                                                            <input form="form-add-persyaratan" type="number" name="pengalaman" id="input-max-pengalaman" class="form-control" style="border-radius: 10px 0px 0px 10px;" placeholder="Max." required>
-                                                            <span class="input-group-text" id="basic-addon2" style="border-radius: 0px 10px 10px 0px;">Thn</span>
-                                                            <div class="invalid-feedback">
-                                                                Maximum Pengalaman belum diisi
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- BIDANG PENGALAMAN -->
-                                            <div class="col-md-7 mb-3">
-                                                <label for="pengalaman">
-                                                    <p class="fw-bold">Bidang Pengalaman</p>
-                                                </label>
-                                                <input form="form-add-persyaratan" type="text" name="bidang" id="bidang" class="form-control rounded-3" placeholder="Contoh: Staff Akunting" style="margin-top: -16px;" required>
-                                                <div class="invalid-feedback">
-                                                    Bidang Pengalaman belum diisi
                                                 </div>
                                             </div>
                                         </div>
@@ -262,8 +229,64 @@
                         </div>
                     </form>
 
+                    <form id="form-add-pengalaman" novalidate>
+                        <div id="pengalaman">
+                            <div class="row justify-content-center mt-5 mb-3">
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <h5 class="fw-bold mb-2">Pengalaman Kerja</h5>
+                                        <div class="row mb-3">
+                                            <!-- LAMA KERJA -->
+                                            <div class="col-md-6 mb-3">
+                                                <label for="pengalaman">
+                                                    <p class="fw-bold">Lama Kerja</p>
+                                                </label>
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <div class="input-group" style="margin-top: -16px;">
+                                                            <input form="form-add-pengalaman" min="0" type="number" name="pengalaman" id="input-min-pengalaman" class="form-control" style="border-radius: 10px 0px 0px 10px;" placeholder="Min." required>
+                                                            <span class="input-group-text" id="basic-addon2" style="border-radius: 0px 10px 10px 0px;">Thn</span>
+                                                            <div class="invalid-feedback">
+                                                                Minimum Pengalaman belum diisi
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="input-group" style="margin-top: -16px;">
+                                                            <input form="form-add-pengalaman" type="number" name="pengalaman" id="input-max-pengalaman" min="0" class="form-control" style="border-radius: 10px 0px 0px 10px;" placeholder="Max." required>
+                                                            <span class="input-group-text" id="basic-addon2" style="border-radius: 0px 10px 10px 0px;">Thn</span>
+                                                            <div class="invalid-feedback">
+                                                                Maximum Pengalaman belum diisi
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- BIDANG PENGALAMAN -->
+                                            <div class="col-md-10 mb-3">
+                                                <label for="pengalaman">
+                                                    <p class="fw-bold">Bidang Pengalaman</p>
+                                                </label>
+                                                <input form="form-add-pengalaman" type="text" name="bidang" id="input-bidang-pengalaman" class="form-control rounded-3" placeholder="Contoh: Staff Akunting" style="margin-top: -16px;" required>
+                                                <div class="invalid-feedback">
+                                                    Bidang Pengalaman belum diisi
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- BUTTON NEXT PREVIOUS -->
+                                <div class="d-flex justify-content-between mx-3">
+                                    <button class="btn btn-secondary rounded-5 text-white" id="btn-prev-pengalaman"><i class="bi bi-arrow-left"></i> Previous</button>
+                                    <button class="btn btn-mockup rounded-5 text-white" form="form-add-pengalaman" type="submit" id="btn-next-pengalaman">Next <i class="bi bi-arrow-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
                     <div id="persyaratan-2">
                         <div class="row justify-content-center mt-5 mb-3">
+                            <!-- PERSYARATAN TAMBAHAN -->
                             <div class="col-md-10 mb-3">
                                 <div id="persyaratan-tambahan">
                                     <label for="persyaratan">
@@ -286,6 +309,7 @@
 
                     <div id="jobdesc">
                         <div class="row justify-content-center mt-5 mb-3">
+                            <!-- JOB DESCRIPTION -->
                             <div class="col-md-10 mb-3">
                                 <div id="jobdesc-tambahan">
                                     <label for="jobdesc">
@@ -309,6 +333,7 @@
                     <form id="form-add-salary" novalidate>
                         <div id="salary">
                             <div class="row justify-content-center mt-5 mb-3">
+                                <!-- SALARY -->
                                 <div class="col-md-10">
                                     <div class="form-group">
                                         <label for="salary">
@@ -351,7 +376,7 @@
                             <!-- BUTTON NEXT - PREVIOUS -->
                             <div class="d-flex justify-content-between mx-3">
                                 <button class="btn btn-secondary rounded-5 text-white" id="btn-prev-salary"><i class="bi bi-arrow-left"></i> Previous</button>
-                                <button form="form-add-salary" type="submit" class="btn btn-mockup rounded-5 text-white" id="btn-submit-vacancy">Submit <i class="bi bi-check-lg"></i></button>
+                                <button form="form-add-salary" type="submit" class="btn btn-success rounded-5 text-white" id="btn-submit-vacancy">Submit <i class="bi bi-check-lg"></i></button>
                             </div>
                         </div>
                     </form>
@@ -360,4 +385,33 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row justify-content-center mt-5">
+                    <div class="col-lg-10 text-center">
+                        <i style="color: #0b8000; font-size: 5rem;" class="bi bi-check-circle-fill"></i>
+                    </div>
+                </div>
+                <div class="row justify-content-center my-3">
+                    <div class="col-lg-12 text-center">
+                        <h3 class="fw-bold text-success">SUCCESS</h3>
+                        <p id="vacancy-alert"></p>
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-3 mb-4">
+                    <div class="col-6">
+                        <div class="d-grid">
+                            <a href="<?= BASE_URL() . 'addvacancy' ?>" class="btn btn-success btn-lg">Continue</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </div>
