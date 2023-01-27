@@ -18,13 +18,33 @@ class Admin extends CI_Controller
     {
         $data['ajax_url'] = [
             [
-                'src' => 'assets/js/vacancy.js',
+                'src' => 'assets/js/latest_vacancy.js',
                 'type' => 'module'
-            ], 
+            ],
+            [
+                'src' => 'assets/js/close_vacancy.js',
+                'type' => 'module'
+            ],
+            [
+                'src' => 'assets/js/open_vacancy.js',
+                'type' => 'module'
+            ],
+            [
+                'src' => 'assets/js/delete_vacancy.js',
+                'type' => 'module'
+            ],
+            [
+                'src' => 'assets/js/sortby_divisi_vacancy.js',
+                'type' => 'module'
+            ],
+            [
+                'src' => 'assets/js/search_vacancy.js',
+                'type' => 'module'
+            ],
             [
                 'src' => 'assets/js/config.js',
                 'type' => 'module'
-            ]
+            ],
         ];
 
         $this->load->view('templateAdmin/header');
@@ -38,7 +58,7 @@ class Admin extends CI_Controller
             [
                 'src' => 'assets/js/add_vacancy.js',
                 'type' => 'module'
-            ], 
+            ],
             [
                 'src' => 'assets/js/config.js',
                 'type' => 'module'
@@ -56,10 +76,10 @@ class Admin extends CI_Controller
         $this->load->view('templateAdmin/footer');
     }
 
-    public function listLowonganDepartemen()
+    public function divisi($idDivisi)
     {
         $this->load->view('templateAdmin/header');
-        $this->load->view('careers/admin/lowongan_departemen');
+        $this->load->view('careers/admin/lowongan_departemen', ['id_divisi' => $idDivisi]);
         $this->load->view('templateAdmin/footer');
     }
 

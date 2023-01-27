@@ -115,7 +115,7 @@
 
     <nav class="navbar bg-light fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#" style="color: #062173;"><img src="<?= base_url() . 'assets/img/logo.png'; ?>" style="width: 100px;"></a>
+            <a class="navbar-brand" href="<?= BASE_URL() ?>" style="color: #062173;"><img src="<?= base_url() . 'assets/img/logo.png'; ?>" style="width: 100px;"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
