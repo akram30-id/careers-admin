@@ -4,6 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['addvacancy'] = 'Admin/add_vacancy';
 $route['addvacancy/(:any)'] = 'Admin/add_vacancy/$1';
 
+// UPDATE VACANCY
+$route['updatevacancy/(:any)'] = 'Admin/update_vacancy/$1';
+
 /*
 | -------------------------------------------------------------------------
 | URI ROUTING

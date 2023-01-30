@@ -6,11 +6,11 @@
         <div class="d-flex justify-content-center">
             <div class="card border-0 shadow-lg p-3" style="border-radius: 32px; width: 1000px; margin-top: 64px;">
                 <div class="card-body">
-                    <h2 class="fw-bold text-center mt-3 mb-2">Tambah Lowongan</h2>
+                    <h2 class="fw-bold text-center mt-3 mb-2" id="state-title">Tambah Lowongan</h2>
                     <div class="progress mx-5 mb-5">
                         <div class="progress-bar" role="progressbar" style="width: 16.7%; font-size: 8pt;" aria-valuemin="1" aria-valuemax="6">1/6</div>
                     </div>
-                    <div id="vacancy">
+                    <div id="vacancy" <?php if(isset($id_vacancy)){echo 'data-id="' . $id_vacancy . '"';} ?>>
                         <form id="form-add-vacancy" novalidate>
                             <div class="row justify-content-center">
                                 <div class="col-md-10">
@@ -20,9 +20,15 @@
                                             <label for="divisi">
                                                 <h5 class="fw-bold">Divisi <sup><a href="<?= base_url() . 'divisi'; ?>" class="fw-bold" style="text-decoration: none;" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" title="Klik untuk tambah divisi.">+</a></sup> </h5>
                                             </label>
-                                            <select form="form-add-vacancy" name="divisi" id="input-divisi" class="form-select" required>
-                                                <option value="">Pilih Divisi</option>
-                                            </select>
+                                            <?php if (isset($id_divisi)) { ?>
+                                                <select form="form-add-vacancy" name="divisi" id="input-divisi" class="form-select" required disabled>
+                                                    <option value="<?= $id_divisi ?>" selected><?= $nama_divisi ?></option>
+                                                </select>
+                                            <?php } else { ?>
+                                                <select form="form-add-vacancy" name="divisi" id="input-divisi" class="form-select" required>
+                                                    <option value="">Pilih Divisi</option>
+                                                </select>
+                                            <?php } ?>
                                             <div class="invalid-feedback">
                                                 Divisi belum dipilih
                                             </div>
@@ -133,7 +139,7 @@
                                                     <option value="">-Pilih gender-</option>
                                                     <option value="Pria">Pria</option>
                                                     <option value="Wanita">Wanita</option>
-                                                    <option value="Semua">Semua Gender</option>
+                                                    <option value="Semua Gender">Semua Gender</option>
                                                 </select>
                                                 <div class="invalid-feedback">
                                                     Gender belum dipilih
@@ -293,7 +299,7 @@
                                         <h4 class="fw-bold">Persyaratan Tambahan</h4>
                                     </label>
                                     <div class="d-flex align-items-center mb-2 mt-3 persyaratan-section">
-                                        <input type="text" name="input-persyaratan" class="form-control input-persyaratan" placeholder="Contoh: Mahir menggunakan Ms. Excel" required>
+                                        <input type="text" id="input-persyaratan" class="form-control input-persyaratan" placeholder="Contoh: Mahir menggunakan Ms. Excel" required>
                                     </div>
                                 </div>
                                 <p id="add-input-persyaratan"><i class="bi bi-plus-circle"></i> Tambah Persyaratan</p>
@@ -316,7 +322,7 @@
                                         <h4 class="fw-bold">Job Description</h4>
                                     </label>
                                     <div class="d-flex align-items-center mb-2 mt-3 jobdesc-section">
-                                        <input type="text" name="input-jobdesc" class="form-control input-jobdesc mb-2 mt-3" placeholder="Contoh: Bertanggung jawab dalam mengelola data-data pengiriman">
+                                        <input type="text" id="input-jobdesc" class="form-control input-jobdesc mb-2 mt-3" placeholder="Contoh: Bertanggung jawab dalam mengelola data-data pengiriman">
                                     </div>
                                 </div>
                                 <p id="add-input-jobdesc"><i class="bi bi-plus-circle"></i> Tambah Jobdesc</p>
@@ -405,7 +411,7 @@
                 <div class="row justify-content-center mt-3 mb-4">
                     <div class="col-6">
                         <div class="d-grid">
-                            <a href="<?= BASE_URL() . 'addvacancy' ?>" class="btn btn-success btn-lg">Continue</a>
+                            <a href="<?= BASE_URL() . 'addvacancy' ?>" class="btn btn-success btn-lg success-submit">Continue</a>
                         </div>
                     </div>
                 </div>

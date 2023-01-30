@@ -7,11 +7,6 @@ class Admin extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        // if ($this->session->userdata('username') != 'administrator') {
-        //     // echo "<h1><b>ACCESS DENIED</b></h1>";
-        //     $this->session->set_flashdata('pesan', '<div class="alert alert-danger text-center" role="alert">ACCESS DENIED</div>');
-        //     return redirect('Careers/npiAdminCareer');
-        // }
     }
 
     public function index()
@@ -52,7 +47,7 @@ class Admin extends CI_Controller
         $this->load->view('templateAdmin/footer', $data);
     }
 
-    public function add_vacancy()
+    public function add_vacancy($idDivisi = NULL)
     {
         $data['ajax_url'] = [
             [
@@ -64,23 +59,94 @@ class Admin extends CI_Controller
                 'type' => 'module'
             ]
         ];
+
+        $nama_divisi = NULL;
+
+        if ($idDivisi != NULL) {
+            $nama_divisi = str_replace("NPI_DIV_", "", $idDivisi);
+            $nama_divisi = str_replace("-", " ", $nama_divisi);
+        }
         $this->load->view('templateAdmin/header');
-        $this->load->view('careers/admin/add_vacancy');
+        $this->load->view('careers/admin/add_vacancy', ['id_divisi' => $idDivisi, 'nama_divisi' => $nama_divisi]);
         $this->load->view('templateAdmin/footer', $data);
     }
 
-    public function detail()
+    public function update_vacancy($idVacancy)
     {
+        $data['ajax_url'] = [
+            [
+                'src' => 'assets/js/update_vacancy.js',
+                'type' => 'module'
+            ],
+            [
+                'src' => 'assets/js/config.js',
+                'type' => 'module'
+            ]
+        ];
+
         $this->load->view('templateAdmin/header');
-        $this->load->view('careers/admin/detail');
-        $this->load->view('templateAdmin/footer');
+        $this->load->view('careers/admin/add_vacancy', ['id_vacancy' => $idVacancy]);
+        $this->load->view('templateAdmin/footer', $data);
+    }
+
+    public function detail($idDivisi, $idVacancy)
+    {
+        $data['ajax_url'] = [
+            [
+                'src' => 'assets/js/vacancy-detail.js',
+                'type' => 'module'
+            ],
+            [
+                'src' => 'assets/js/config.js',
+                'type' => 'module'
+            ],
+            [
+                'src' => 'assets/js/skeleton-loader/jquery.skeleton.js',
+                'type' => ''
+            ]
+        ];
+        
+        $this->load->view('templateAdmin/header');
+        $this->load->view('careers/admin/detail', ['id_vacancy' => $idVacancy, 'id_divisi' => $idDivisi]);
+        $this->load->view('templateAdmin/footer', $data);
     }
 
     public function divisi($idDivisi)
     {
+        $data['ajax_url'] = [
+            [
+                'src' => 'assets/js/vacancy-divisi/main.js',
+                'type' => 'module'
+            ],
+            [
+                'src' => 'assets/js/vacancy-divisi/close_vacancy.js',
+                'type' => 'module'
+            ],
+            [
+                'src' => 'assets/js/vacancy-divisi/open_vacancy.js',
+                'type' => 'module'
+            ],
+            [
+                'src' => 'assets/js/vacancy-divisi/delete_vacancy.js',
+                'type' => 'module'
+            ],
+            [
+                'src' => 'assets/js/vacancy-divisi/search_by_divisi.js',
+                'type' => 'module'
+            ],
+            [
+                'src' => 'assets/js/vacancy-divisi/filter_vacancy.js',
+                'type' => 'module'
+            ],
+            [
+                'src' => 'assets/js/config.js',
+                'type' => 'module'
+            ]
+        ];
+
         $this->load->view('templateAdmin/header');
-        $this->load->view('careers/admin/lowongan_departemen', ['id_divisi' => $idDivisi]);
-        $this->load->view('templateAdmin/footer');
+        $this->load->view('careers/admin/vacancy_divisi', ['id_divisi' => $idDivisi]);
+        $this->load->view('templateAdmin/footer', $data);
     }
 
     public function tambah_divisi()

@@ -5,7 +5,195 @@ $(document).ready(function () {
     const divisi_server_url = base_server + 'divisi/'
     const pendidikan_server_url = base_server + 'pendidikan/'
 
+    const id_vacancy = $("#vacancy").attr("data-id")
+
+    $("#state-title").text("Update Lowongan")
+
+    let id_divisi = ''
+    let id_level = ''
+    let id_pendidikan = ''
+    $.ajax({
+        url: base_server + 'vacancy/u/' + id_vacancy,
+        type: 'POST',
+        dataType: 'json',
+        success: function (result) {
+            if (result.response.status == 200) {
+                $.ajax({
+                    url: base_server + 'vacancy/u/' + id_vacancy,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (result_update) {
+                        if (result_update.response.status == 200) {
+                            const data = result_update.response.data
+                            const session = result_update.response.session
+                            console.info(data)
+                            console.info(session)
+
+                            id_divisi = data.vacancy[0].id_divisi
+                            id_level = data.vacancy[0].level
+                            id_pendidikan = data.persyaratan[0].id_pendidikan
+
+                            // divisi set value
+                            $.ajax({
+                                url: divisi_server_url,
+                                type: 'GET',
+                                dataType: 'json',
+                                success: function (result) {
+                                    if (result.response.success == true) {
+                                        for (let i = 0; i < result.response.data.length; i++) {
+                                            if (result.response.data[i].id_divisi == id_divisi) {
+                                                $("#input-divisi").append(`
+                                                    <option value="${result.response.data[i].id_divisi}" selected>${result.response.data[i].nama_divisi}</option>
+                                                `)
+                                            } else {
+                                                $("#input-divisi").append(`
+                                                    <option value="${result.response.data[i].id_divisi}">${result.response.data[i].nama_divisi}</option>
+                                                `)
+                                            }
+                                        }
+                                    } else {
+
+                                    }
+                                }
+                            })
+
+                            // pendidikan set value
+                            $.ajax({
+                                url: pendidikan_server_url,
+                                type: 'GET',
+                                dataType: 'json',
+                                success: function (result) {
+                                    if (result.response.success == true) {
+                                        for (let i = 0; i < result.response.data.length; i++) {
+                                            if (result.response.data[i].id_pendidikan == id_pendidikan) {
+                                                $("#input-pendidikan").append(`
+                                                    <option value="${result.response.data[i].id_pendidikan}" selected>${result.response.data[i].pendidikan}</option>
+                                                `)
+                                            } else {
+                                                $("#input-pendidikan").append(`
+                                                    <option value="${result.response.data[i].id_pendidikan}">${result.response.data[i].pendidikan}</option>
+                                                `)
+                                            }
+                                        }
+                                    } else {
+                                        alert(result.response.message)
+                                    }
+                                }
+                            })
+
+                            //level set value
+                            // $(`#input-level option[value='${id_level}']`).prop('selected', true)
+                            $(`#input-level`).val(`${id_level}`)
+
+                            // posisi set value
+                            $("#input-posisi").val(`${data.vacancy[0].posisi}`)
+
+                            // deskripsi set value
+                            $("#input-deskripsi").val(`${data.vacancy[0].deskripsi_lowongan}`)
+
+                            // expired set value
+                            if (data.vacancy[0].expired_at == "0000-00-00" || data.vacancy[0].expired_at == null) {
+                                $("#expired-date-check").prop("checked", true)
+                                $("#input-expired").prop("disabled", true)
+                            } else {
+                                $("#input-expired").val(`${data.vacancy[0].expired_at}`)
+                            }
+
+                            // gender set value
+                            $(`#input-gender option[value='${data.persyaratan[0].gender}']`).prop('selected', true)
+
+                            // usia set value
+                            $("#input-min-usia").val(`${data.persyaratan[0].min_usia}`)
+                            $("#input-max-usia").val(`${data.persyaratan[0].max_usia}`)
+
+                            // jurusan set value
+                            $("#input-jurusan").val(`${data.persyaratan[0].jurusan}`)
+
+                            // vaksin set value
+                            $("#input-vaksin").val(`${data.persyaratan[0].dosis_vaksin}`)
+
+                            // pengalaman set value
+                            $("#input-min-pengalaman").val(`${data.pengalaman[0].min_lama_pengalaman}`)
+                            $("#input-max-pengalaman").val(`${data.pengalaman[0].max_lama_pengalaman}`)
+
+                            // bidang pengalaman set value
+                            $("#input-bidang-pengalaman").val(`${data.pengalaman[0].bidang_pengalaman}`)
+
+                            // persyaratan tambahan set value
+                            $("#input-persyaratan").val(`${data.tambahan_persyaratan[0].tambahan_persyaratan}`)
+                            let order_syarat = 0
+                            for (let i = 1; i < data.tambahan_persyaratan.length; i++) {
+                                order_syarat = i
+                                $("#persyaratan-tambahan").append(`
+                                    <div id="section-${order_syarat}" class="d-flex align-items-center mb-2 mt-3">
+                                        <input type="text" name="input-persyaratan" class="form-control input-persyaratan" placeholder="Contoh: Mahir menggunakan Ms. Excel" value="${data.tambahan_persyaratan[i].tambahan_persyaratan}">
+                                        <i class="bi bi-x-lg text-danger" style="margin-left: 8px;" onclick="document.getElementById('section-${order_syarat}').remove()"></i>
+                                    </div>
+                                `)
+                            }
+
+                            $("#add-input-persyaratan").css({ 'cursor': 'pointer' }).on("click", function () {
+                                order_syarat++
+                                $("#persyaratan-tambahan").append(`
+                                    <div id="section-${order_syarat}" class="d-flex align-items-center mb-2 mt-3">
+                                        <input type="text" name="input-persyaratan" class="form-control input-persyaratan" placeholder="Contoh: Mahir menggunakan Ms. Excel">
+                                        <i class="bi bi-x-lg text-danger" style="margin-left: 8px;" onclick="document.getElementById('section-${order_syarat}').remove()"></i>
+                                    </div>
+                                `)
+                            })
+                            order_syarat = order_syarat
+
+                            // jobdesc set value
+                            $("#input-jobdesc").val(`${data.jobdesc[0].deskripsi_jobdesc}`)
+                            let order_jobdesc = 0
+                            for (let i = 1; i < data.jobdesc.length; i++) {
+                                order_jobdesc = i
+                                $("#jobdesc-tambahan").append(`
+                                    <div id="section-jobdesc-${order_jobdesc}" class="d-flex align-items-center mb-2 mt-3">
+                                        <input type="text" name="input-jobdesc" class="form-control input-jobdesc" placeholder="Contoh: Bertanggung jawab dalam mengelola data-data adminsitrasi" value="${data.jobdesc[i].deskripsi_jobdesc}">
+                                        <i class="bi bi-x-lg text-danger" style="margin-left: 8px;" onclick="document.getElementById('section-jobdesc-${order_jobdesc}').remove()"></i>
+                                    </div>
+                                `)
+                            }
+
+                            $("#add-input-jobdesc").css({ 'cursor': 'pointer' }).on("click", function () {
+                                order_jobdesc++
+                                $("#jobdesc-tambahan").append(`
+                                    <div id="section-jobdesc-${order_jobdesc}" class="d-flex align-items-center mb-2 mt-3">
+                                        <input type="text" name="input-jobdesc" class="form-control input-jobdesc" placeholder="Contoh: Bertanggung jawab dalam mengelola data-data adminsitrasi">
+                                        <i class="bi bi-x-lg text-danger" style="margin-left: 8px;" onclick="document.getElementById('section-jobdesc-${order_jobdesc}').remove()"></i>
+                                    </div>
+                                `)
+                            })
+                            order_jobdesc = order_jobdesc
+
+                            // salary set value
+                            if (data.salary[0].min_salary == 0 && data.salary[0].max_salary == 0) {
+                                $("#salary-check").prop("checked", true)
+                                $("#input-min-salary").prop("disabled", true)
+                                $("#input-max-salary").prop("disabled", true)
+
+                                $("#input-max-salary").val(0)
+                                $("#input-min-salary").val(0)
+                            } else {
+                                $("#input-min-salary").val(`${data.salary[0].min_salary.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")}`)
+                                $("#input-max-salary").val(`${data.salary[0].max_salary.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")}`)
+                            }
+
+                            // continue submit
+                            $(".success-submit").prop("href", `${base_client}admin/detail/${data.vacancy[0].id_divisi}/${id_vacancy}`)
+                            $("#vacancy-alert").html(`<p>Lowongan berhasil diupdate. <a href="${base_client}admin/detail/${data.vacancy[0].id_divisi}/${id_vacancy}" class="fw-bold success-submit"><u>Lihat Disini</u></a></p>`)
+                        }
+                    }
+                })
+            } else {
+                alert('Internal Server Error')
+            }
+        }
+    })
+
     const intiState = () => {
+
         $('#vacancy').show()
         $('#persyaratan').hide()
         $('#pengalaman').hide()
@@ -114,18 +302,6 @@ $(document).ready(function () {
         })
     }
 
-    let order_syarat = 0
-    $("#add-input-persyaratan").css({ 'cursor': 'pointer' }).on("click", function () {
-        order_syarat++
-        $("#persyaratan-tambahan").append(`
-                <div id="section-${order_syarat}" class="d-flex align-items-center mb-2 mt-3">
-                    <input type="text" name="input-persyaratan" class="form-control input-persyaratan" placeholder="Contoh: Mahir menggunakan Ms. Excel">
-                    <i class="bi bi-x-lg text-danger" style="margin-left: 8px;" onclick="document.getElementById('section-${order_syarat}').remove()"></i>
-                </div>
-            `)
-    })
-    order_syarat = order_syarat
-
     const state5 = () => {
         $('#vacancy').hide()
         $('#persyaratan').hide()
@@ -145,18 +321,6 @@ $(document).ready(function () {
             event.preventDefault()
         })
     }
-
-    let order_jobdesc = 0
-    $("#add-input-jobdesc").css({ 'cursor': 'pointer' }).on("click", function () {
-        order_jobdesc++
-        $("#jobdesc-tambahan").append(`
-            <div id="section-jobdesc-${order_jobdesc}" class="d-flex align-items-center mb-2 mt-3">
-                <input type="text" name="input-jobdesc" class="form-control input-jobdesc" placeholder="Contoh: Bertanggung jawab dalam mengelola data-data adminsitrasi">
-                <i class="bi bi-x-lg text-danger" style="margin-left: 8px;" onclick="document.getElementById('section-jobdesc-${order_jobdesc}').remove()"></i>
-            </div>
-        `)
-    })
-    order_jobdesc = order_jobdesc
 
     const state6 = () => {
         $('#vacancy').hide()
@@ -183,46 +347,6 @@ $(document).ready(function () {
         })
 
         validationSalary()
-    }
-
-    function divisiList() {
-
-        $.ajax({
-            url: divisi_server_url,
-            type: 'GET',
-            dataType: 'json',
-            success: function (result) {
-                if (result.response.success == true) {
-                    for (let i = 0; i < result.response.data.length; i++) {
-                        $("#input-divisi").append(`
-                        <option value="${result.response.data[i].id_divisi}">${result.response.data[i].nama_divisi}</option>
-                    `)
-                    }
-                } else {
-
-                }
-            }
-        })
-
-    }
-
-    function pendidikanList() {
-        $.ajax({
-            url: pendidikan_server_url,
-            type: 'GET',
-            dataType: 'json',
-            success: function (result) {
-                if (result.response.success == true) {
-                    for (let i = 0; i < result.response.data.length; i++) {
-                        $("#input-pendidikan").append(`
-                            <option value="${result.response.data[i].id_pendidikan}">${result.response.data[i].pendidikan}</option>
-                        `)
-                    }
-                } else {
-                    alert(result.response.message)
-                }
-            }
-        })
     }
 
     // Validation input on VANCANCY form section
@@ -510,16 +634,15 @@ $(document).ready(function () {
                             data: data,
                             success: function (result) {
                                 if (result.response.success == true) {
+                                    // SUBMIT ALL PROGRESS
                                     $.ajax({
                                         url: base_server + 'vacancy',
-                                        type: 'POST',
+                                        type: 'PUT',
                                         dataType: 'json',
                                         success: function (result) {
                                             if (result.response.success == true) {
-                                                $("#exampleModal").modal("show")
                                                 const id_vacancy = result.response.id_vacancy
-                                                const id_divisi = $("#input-divisi").val()
-                                                $("#vacancy-alert").html(`<p>Lowongan berhasil ditambahkan. <a href="${base_client}/admin/detail/${id_divisi}/${id_vacancy}" class="fw-bold"><u>Lihat Disini</u></a></p>`)
+                                                $("#exampleModal").modal("show")
                                             } else {
                                                 alert('Failed insert all session saved')
                                             }
@@ -539,7 +662,5 @@ $(document).ready(function () {
     }
 
     intiState()
-    divisiList()
-    pendidikanList()
 
 })

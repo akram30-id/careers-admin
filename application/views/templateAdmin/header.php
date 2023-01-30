@@ -109,6 +109,9 @@
             color: #fff !important;
         }
     </style>
+
+    <!-- SKELETON LOADER -->
+    <link href="<?= BASE_URL() . 'assets/css/skeleton-loader/jquery.skeleton.css' ?>" rel="stylesheet">
 </head>
 
 <body>

@@ -8,7 +8,7 @@ $(document).ready(function () {
 
         $("#btn-search").on("click", function () {
             const searchValue = $("#input-search-vacancy").val()
-            const id_divisi = $("#sort-by-divisi option").filter(':selected').val()
+            let id_divisi = $("#sort-by-divisi option").filter(':selected').val()
 
             $("#content-vacancy").html(`<h3 class="fw-bold text-center my-5"><i>Loading . . . .</i></h3>`)
 
@@ -39,7 +39,7 @@ $(document).ready(function () {
                                                     <div class="container-lg mt-5" id="${result.response.data[i].id_divisi}">
                                                         <div class="d-flex align-items-end">
                                                             <img src="${base_client}assets/img/hrd.svg">
-                                                            <h1 class="text-primary fw-bold" style="margin-bottom: 32px;">${result.response.data[i].nama_divisi}</h1>
+                                                            <h1 class="text-primary fw-bold" id="divisi" data-id="${result.response.data[i].id_divisi}" style="margin-bottom: 32px;">${result.response.data[i].nama_divisi}</h1>
                                                         </div>
                                             
                                                         <div class="card mb-3 rounded-5 border-0 shadow" style="max-width: 48rem; max-height: 2rem;">
@@ -72,6 +72,7 @@ $(document).ready(function () {
                                                     const nama_divisi = result.response.data[i].nama_divisi
                                                     const id_vacancy = search_result.response.data[`${result.response.data[i].nama_divisi}`][j].id_vacancy
                                                     const status = search_result.response.data[`${result.response.data[i].nama_divisi}`][j].status
+                                                    const id_divisi = result.response.data[i].id_divisi
 
                                                     if (search_result.response.data[`${result.response.data[i].nama_divisi}`][j] == undefined) {
                                                         content = `
@@ -136,15 +137,22 @@ $(document).ready(function () {
                                                                 break;
                                                         }
 
+                                                        let salary = ''
+                                                        if (min_salary == "0" && max_salary == "0") {
+                                                            salary = 'Negotiable Salary'
+                                                        } else {
+                                                            salary = `Rp.${min_salary.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")} - Rp.${max_salary.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")}`
+                                                        }
+
                                                         if (status === 'Close') {
                                                             content = `
                                                             <div class="row mt-3 justify-content-center align-items-center">
                                                                 <div class="col-sm-8">
                                                                     <div class="d-flex justify-content-start">
-                                                                        <h2 class="fw-bold text-danger">${posisi}</h2>
+                                                                        <h2 class="fw-bold"><a href="${base_client}admin/detail/${id_divisi}/${id_vacancy}" class="text-decoration-none text-danger">${posisi}</a></h2>
                                                                     </div>
                                                                     <div class="d-flex justify-content-start my-3">
-                                                                        <h6 class="fw-semibold text-danger">Rp.${min_salary.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")} - Rp.${max_salary.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")}</h6>
+                                                                        <h6 class="fw-semibold text-danger">${salary}</h6>
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="col-sm-3">
@@ -235,10 +243,10 @@ $(document).ready(function () {
                                                             <div class="row mt-3 justify-content-center align-items-center">
                                                                 <div class="col-sm-8">
                                                                     <div class="d-flex justify-content-start">
-                                                                        <h2 class="fw-bold">${posisi}</h2>
+                                                                        <h2 class="fw-bold"><a href="${base_client}admin/detail/${id_divisi}/${id_vacancy}" class="text-decoration-none text-black">${posisi}</a></h2>
                                                                     </div>
                                                                     <div class="d-flex justify-content-start my-3">
-                                                                        <h6 class="fw-semibold text-success">Rp.${min_salary.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")} - Rp.${max_salary.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")}</h6>
+                                                                        <h6 class="fw-semibold text-success">${salary}</h6>
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="col-sm-3">
