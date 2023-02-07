@@ -7,6 +7,10 @@ $route['addvacancy/(:any)'] = 'Admin/add_vacancy/$1';
 // UPDATE VACANCY
 $route['updatevacancy/(:any)'] = 'Admin/update_vacancy/$1';
 
+// APPLICANT
+$route['applicant/(:any)'] = 'Applicant/index/$1';
+$route['applicant/add/(:any)'] = 'Applicant/tambah_kandidat/$1';
+
 /*
 | -------------------------------------------------------------------------
 | URI ROUTING

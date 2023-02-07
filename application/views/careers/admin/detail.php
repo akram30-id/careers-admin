@@ -43,7 +43,7 @@
                 </div>
                 <div class="col-7">
                     <div class="d-grid">
-                        <a href="#" class="btn btn-warning rounded-5 text-grey fw-bold mt-4">Lihat Data Pelamar</a>
+                        <a href="<?= BASE_URL() . 'applicant/' . $id_vacancy ?>" class="btn btn-warning rounded-5 text-grey fw-bold mt-4">Lihat Data Pelamar</a>
                     </div>
                 </div>
             </div>
