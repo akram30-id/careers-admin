@@ -9,6 +9,8 @@ $route['updatevacancy/(:any)'] = 'Admin/update_vacancy/$1';
 
 // APPLICANT
 $route['applicant/(:any)'] = 'Applicant/index/$1';
+
+// add applicant
 $route['applicant/add/(:any)'] = 'Applicant/tambah_kandidat/$1';
 
 /*

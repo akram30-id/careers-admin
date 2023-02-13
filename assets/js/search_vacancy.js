@@ -178,7 +178,7 @@ $(document).ready(function () {
                                                                 </div>
                                                                 <div class="col-sm-3">
                                                                     <div class="d-grid gap-2">
-                                                                        <a href="<?= base_url() . 'applicant'; ?>" class="btn btn-mockup fw-bold text-white rounded-5">Data Pelamar</a>
+                                                                        <a href="${base_client}applicant/${id_vacancy}" class="btn btn-mockup fw-bold text-white rounded-5">Data Pelamar</a>
                                                                         <div class="row justify-content-center">
                                                                             <div class="col-8 d-grid">
                                                                                 <button class="btn btn-success fw-bold rounded-5 btn-modal-open" data-bs-toggle="modal" data-id="${id_vacancy}" data-bs-target="#openModal-${id_vacancy}" type="button" id="btn-confirm-open">Open</button>
@@ -272,7 +272,7 @@ $(document).ready(function () {
                                                                 </div>
                                                                 <div class="col-sm-3">
                                                                     <div class="d-grid gap-2">
-                                                                        <a href="<?= base_url() . 'applicant'; ?>" class="btn btn-mockup fw-bold text-white rounded-5">Data Pelamar</a>
+                                                                        <a href="${base_client}applicant/${id_vacancy}" class="btn btn-mockup fw-bold text-white rounded-5">Data Pelamar</a>
                                                                         <div class="row justify-content-center">
                                                                             <div class="col-8 d-grid">
                                                                                 <a class="btn btn-secondary fw-bold rounded-5 btn-modal-close" data-bs-toggle="modal" data-id="${id_vacancy}" data-bs-target="#closeModal-${id_vacancy}" type="button" id="btn-confirm-close">Close</a>

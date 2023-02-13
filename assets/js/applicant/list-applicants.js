@@ -2,18 +2,52 @@ import { applicant_server, base_client } from "../config.js";
 
 const id_vacancy = $(".vacancy").attr('data-id')
 
-const showApplicants = $('#tblPelamar').DataTable({
+$("#banned").hide()
+$("#qualified").show()
+$("#btn-show-qualified").hide()
+
+const showApplicants = $('#tbl-applicant-qualified').DataTable({
     "processing": true,
     "serverSide": true,
     "order": [],
     "ajax": {
         //panggil method ajax list dengan ajax
-        "url": applicant_server + 'applicant/' + id_vacancy,
+        "url": applicant_server + 'applicant/list/' + id_vacancy + '/qualified',
         "type": "GET"
     }
 });
 
-$("#tblPelamar").on("click", ".btn-show-details", function () {
+const showApplicantsBanned = $('#tbl-applicant-banned').DataTable({
+    "processing": true,
+    "serverSide": true,
+    "order": [],
+    "ajax": {
+        //panggil method ajax list dengan ajax
+        "url": applicant_server + 'applicant/list/' + id_vacancy + '/disqualified',
+        "type": "GET"
+    }
+});
+
+$("#btn-show-banned").on("click", function () {
+
+    $("#btn-show-banned").hide()
+    $("#btn-show-qualified").show()
+
+    $("#banned").show()
+    $("#qualified").hide()
+
+})
+
+$("#btn-show-qualified").on("click", function () {
+
+    $("#btn-show-banned").show()
+    $("#btn-show-qualified").hide()
+
+    $("#banned").hide()
+    $("#qualified").show()
+})
+
+$(".table-responsive").on("click", ".btn-show-details", function () {
 
     const id_applicant = $(this).data('id')
 
@@ -133,4 +167,4 @@ const info = () => {
 
 info()
 
-export { showApplicants }
+export { showApplicants, showApplicantsBanned }

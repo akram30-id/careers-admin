@@ -1,11 +1,11 @@
 import { applicant_server } from "../config.js";
-import { showApplicants } from "./list-applicants.js";
+import { showApplicants, showApplicantsBanned } from "./list-applicants.js";
 
 $(document).ready(function () {
 
     const DeleteApplicant = () => {
 
-        $("#tblPelamar").on("click", ".btn-delete-personal", function () {
+        $(".table-responsive").on("click", ".btn-delete-personal", function () {
 
             let id_personal = $(this).data('id')
 
@@ -26,15 +26,14 @@ $(document).ready(function () {
                             id_personal: id_personal
                         },
                         success: function (result) {
-                            $("#deleteModal").modal('hide')
                             showApplicants.clear().draw()
+                            showApplicantsBanned.clear().draw()
                         }
                     })
                 }
             })
 
             $("#no-delete").on("click", function () {
-                $("#deleteModal").modal('hide')
                 id_personal = null
             })
 

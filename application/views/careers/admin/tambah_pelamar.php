@@ -278,8 +278,7 @@
         <div class="row justify-content-center mt-5" style="margin-bottom: 256px !important;">
             <div class="col-sm-4">
                 <div class="d-grid gap-2">
-                    <button class="btn btn-primary rounded-5 fw-bold" type="submit" id="btn-submit-applicant">Kirim</button>
-                    <button id="delete-session">Delete Session</button>
+                    <button class="btn btn-primary rounded-5 fw-bold" type="submit" id="btn-submit-applicant">Submit</button>
                 </div>
             </div>
         </div>

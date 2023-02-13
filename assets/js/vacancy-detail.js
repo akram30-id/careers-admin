@@ -102,6 +102,7 @@ $(document).ready(function () {
                     $("#persyaratan-vacancy").append(`
                         <li class="fw-semibold mb-2">${data.persyaratan[0].gender}, ${usia}</li>
                         <li class="fw-semibold mb-2">Pendidikan Terakhir ${data.pendidikan[0].pendidikan} ${jurusan}</li>
+                        <li class="fw-semibold mb-2">Pengalaman ${data.pengalaman[0].min_lama_pengalaman} - ${data.pengalaman[0].max_lama_pengalaman} Tahun di Bidang ${data.pengalaman[0].bidang_pengalaman}</li>
                         <li class="fw-semibold mb-2">Sudah Vaksin ${data.persyaratan[0].dosis_vaksin}</li>
                     `)
                     for (let j = 0; j < data.tambahan_persyaratan.length; j++) {

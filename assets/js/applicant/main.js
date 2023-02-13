@@ -95,14 +95,5 @@ $(document).ready(function () {
         info()
     }
 
-    $("#delete-session").on("click", function (event) {
-        $.ajax({
-            url: applicant_server + 'apply',
-            type: 'DELETE',
-            dataType: 'json',
-        })
-        event.preventDefault()
-    })
-
     Main()
 });

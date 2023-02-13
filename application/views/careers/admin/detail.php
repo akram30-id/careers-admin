@@ -3,7 +3,7 @@
         <div class="card-body">
             <nav aria-label="breadcrumb" style="margin-left: 32px;">
                 <ol class="breadcrumb mt-1">
-                    <li class="breadcrumb-item"><a href="<?= base_url() . 'Admin'; ?>" style="text-decoration: none;">List Lowongan</a></li>
+                    <li class="breadcrumb-item"><a href="<?= base_url(); ?>" style="text-decoration: none;">List Lowongan</a></li>
                     <li class="breadcrumb-item"><a href="<?= base_url() . 'admin/divisi/' . $id_divisi; ?>" style="text-decoration: none;" id="nav-divisi">IT</a></li>
                     <li class="breadcrumb-item active" id="vacancy" data-idvacancy="<?= $id_vacancy ?>" aria-current="page">Detail Loker</li>
                 </ol>

@@ -7,7 +7,7 @@
                         <nav aria-label="breadcrumb" style="margin-left: 32px;">
                             <ol class="breadcrumb mt-1">
                                 <li class="breadcrumb-item"><a href="<?= base_url(); ?>" style="text-decoration: none;">Career</a></li>
-                                <li class="breadcrumb-item"><a href="<?= base_url() . 'Admin'; ?>" style="text-decoration: none;">List Lowongan</a></li>
+                                <li class="breadcrumb-item"><a href="<?= base_url(); ?>" style="text-decoration: none;">List Lowongan</a></li>
                                 <li class="breadcrumb-item active vacancy" data-id="<?= $id_vacancy ?>" aria-current="page"><i>Loading . . . .</i></li>
                             </ol>
                         </nav>
@@ -37,22 +37,37 @@
     </div>
 </div>
 
-<div class="container mt-5">
+<div class="container mt-5" id="list-applicant">
     <div class="row">
         <div class="col-12">
             <div class="card border-0 rounded-4 shadow-lg mb-5">
                 <div class="card-body">
-                    <div class="row justify-content-between align-items-center">
-                        <div class="col-6">
-                            <a href="<?= base_url() . 'applicant/add/' . $id_vacancy; ?>" class="btn btn-primary mt-3 mb-5" style="margin-left: 32px;">Tambah Data</a>
-                        </div>
-                        <div class="col-6">
-                            <a href="<?= base_url() . 'applicant/banned'; ?>" class="text-danger text-end fw-bold mt-3 mb-5" style="margin-left: 32px;">Tak Memenuhi Syarat</a>
-                        </div>
+                    <div class="d-flex justify-content-between align-items-center p-3">
+                        <a href="<?= base_url() . 'applicant/add/' . $id_vacancy; ?>" class="btn btn-primary btn-sm mt-3 mb-5">Tambah Data</a>
+                        <a href="#detail" class="text-danger fs-6 fw-bold mt-3 mb-5" id="btn-show-banned">Tak Memenuhi Syarat</a>
+                        <a href="#detail" class="text-success fs-6 fw-bold mt-3 mb-5" id="btn-show-qualified">Memenuhi Syarat</a>
                     </div>
                     <div class="container-lg">
-                        <div class="table-responsive">
-                            <table class="table table-bordered p-3 mt-3" id="tblPelamar">
+                        <div class="table-responsive" id="qualified">
+                            <table class="table table-bordered p-3 mt-3" id="tbl-applicant-qualified">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama Lengkap</th>
+                                        <th>Tempat, Tgl. Lahir</th>
+                                        <th>Email</th>
+                                        <th>No. Kontak</th>
+                                        <th>Referensi</th>
+                                        <th>Details</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-responsive" id="banned">
+                            <table class="table table-bordered p-3 mt-3" id="tbl-applicant-banned">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -82,35 +97,31 @@
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title fw-bold" id="applicant-name">Modal title</h3>
+                <h3 class="modal-title fw-bold" id="applicant-name"><u>Loading . . . </u></h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <h4 class="fw-semibold text-primary mb-3">Pengalaman Kerja</h4>
-                <div class="row justify-content-center mb-5" id="applicant-pengalaman">
+                <div class="row" id="applicant-pengalaman">
                     <div class="col-sm-6">
-                        <h5 class="institusi fw-semibold text-black">PT Nippisun Indonesia (8 bulan)</h5>
-                        <p><span class="text-black fw-semibold">(Staff IT)</span> - Membuat beberapa sistem di perusahaan sehingga menghemat 2 milyar per-tahun</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <h5 class="institusi fw-semibold text-black">Akram Dev (2 tahun)</h5>
-                        <p><span class="text-black fw-semibold">(Programmer)</span> - Membuat beberapa sistem di perusahaan sehingga menghemat 2 milyar per-tahun</p>
+                        <h5 class="institusi fw-semibold text-black"><u>Loading . . . .</u></h5>
+                        <p><span class="text-black fw-semibold"></span> <u>Loading . . . .</u></p>
                     </div>
                 </div>
-
+                <hr>
                 <h4 class="fw-semibold text-primary mb-3">Pendidikan</h4>
-                <div class="row mb-5" id="applicant-pendidikan">
+                <div class="row" id="applicant-pendidikan">
                     <div class="col-sm-8">
-                        <h5 class="institusi fw-semibold text-black">Universitas Bina Sarana Informatika</h5>
-                        <p><span class="text-black fw-semibold">(S1 - Teknologi Informasi)</span> - Mendapatkan penghargaan summa-cumlaude di seluruh kampus.</p>
+                        <h5 class="institusi fw-semibold text-black"><u>Loading . . . .</u></h5>
+                        <p><span class="text-black fw-semibold"><u>Loading . . . .</u></span> <u>Loading . . . .</u></p>
                     </div>
                 </div>
-
+                <hr>
                 <h4 class="fw-semibold text-primary mb-3">Sertifikasi Keahlian</h4>
-                <div class="row mb-5" id="applicant-keahlian">
+                <div class="row" id="applicant-keahlian">
                     <div class="col-sm-8">
-                        <h5 class="institusi fw-semibold text-black">CCNA 1 V.7 - Introduction to Network</h5>
-                        <p><span class="text-black fw-semibold">(10 January 2019 - 10 January 2023)</span> - </p> <a class="btn-sm btn btn-secondary" href="#" target="_blank"><i class="bi bi-list-stars"></i> Certificate</a>
+                        <h5 class="institusi fw-semibold text-black"><u>Loading . . . .</u></h5>
+                        <p><span class="text-black fw-semibold"><u>Loading . . . .</u></span> - </p> <a class="btn-sm btn btn-secondary" href="#" target="_blank"><i class="bi bi-list-stars"></i> <u>Loading . . . .</u></a>
                     </div>
                 </div>
             </div>
@@ -140,12 +151,12 @@
                 <div class="row justify-content-center mt-5 mb-4">
                     <div class="col-3">
                         <div class="d-grid">
-                            <button class="btn btn-danger btn-lg" id="yes-delete">Yes</button>
+                            <button class="btn btn-danger btn-lg" id="yes-delete" data-bs-dismiss="modal">Yes</button>
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="d-grid">
-                            <button class="btn btn-secondary btn-lg" id="no-delete">No</button>
+                            <button class="btn btn-secondary btn-lg" id="no-delete" data-bs-dismiss="modal">No</button>
                         </div>
                     </div>
                 </div>

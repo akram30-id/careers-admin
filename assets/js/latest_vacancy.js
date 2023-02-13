@@ -3,6 +3,14 @@ import { base_server, base_client } from "./config.js";
 const LatestVacancy = () => {
 
     $.ajax({
+        url: base_server + 'vacancy/synchronize',
+        type: 'PUT',
+        success: function (result) {
+            console.info(result)
+        }
+    })
+
+    $.ajax({
         url: base_server + 'divisi',
         type: 'GET',
         dataType: 'json',
@@ -170,7 +178,7 @@ const LatestVacancy = () => {
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <div class="d-grid gap-2">
-                                                        <a href="<?= base_url() . 'applicant'; ?>" class="btn btn-mockup fw-bold text-white rounded-5">Data Pelamar</a>
+                                                        <a href="${base_client}applicant/${id_vacancy}" class="btn btn-mockup fw-bold text-white rounded-5">Data Pelamar</a>
                                                         <div class="row justify-content-center">
                                                             <div class="col-8 d-grid">
                                                                 <button class="btn btn-success fw-bold rounded-5 btn-modal-open" data-bs-toggle="modal" data-id="${id_vacancy}" data-bs-target="#openModal-${id_vacancy}" type="button" id="btn-confirm-open">Open</button>
@@ -233,85 +241,84 @@ const LatestVacancy = () => {
                                         } else {
                                             content = `
                                             <div class="row mt-3 justify-content-center align-items-center">
-                                                    <div class="col-sm-8">
-                                                        <div class="d-flex justify-content-start">
-                                                            <h2 class="fw-bold"><a href="${base_client}admin/detail/${id_divisi}/${id_vacancy}" class="text-decoration-none text-black">${posisi}</a></h2>
-                                                        </div>
-                                                        <div class="d-flex justify-content-start my-3">
-                                                            <h6 class="fw-semibold text-success">${salary}</h6>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-sm-3">
-                                                                <div class="d-flex">
-                                                                    <i class="fa-solid fa-briefcase" style="margin-right: 8px; margin-top: 4px;"></i>
-                                                                    <p class="fw-semibold">${nama_divisi}</p>
-                                                                </div>
+                                                <div class="col-sm-8">
+                                                    <div class="d-flex justify-content-start">
+                                                        <h2 class="fw-bold"><a href="${base_client}admin/detail/${id_divisi}/${id_vacancy}" class="text-decoration-none text-black">${posisi}</a></h2>
+                                                    </div>
+                                                    <div class="d-flex justify-content-start my-3">
+                                                        <h6 class="fw-semibold text-success">${salary}</h6>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-3">
+                                                            <div class="d-flex">
+                                                                <i class="fa-solid fa-briefcase" style="margin-right: 8px; margin-top: 4px;"></i>
+                                                                <p class="fw-semibold">${nama_divisi}</p>
                                                             </div>
+                                                        </div>
 
-                                                            <div class="col-sm-3">
-                                                                <div class="d-flex">
-                                                                    <i class="fa-solid fa-signal" style="margin-right: 8px; margin-top: 4px;"></i>
-                                                                    <p class="fw-semibold">${level}</p>
-                                                                </div>
+                                                        <div class="col-sm-3">
+                                                            <div class="d-flex">
+                                                                <i class="fa-solid fa-signal" style="margin-right: 8px; margin-top: 4px;"></i>
+                                                                <p class="fw-semibold">${level}</p>
                                                             </div>
+                                                        </div>
 
-                                                            <div class="col-sm-4">
-                                                                <div class="d-flex">
-                                                                    <p class="fw-semibold"><i>${dateDiff}</i></p>
-                                                                </div>
+                                                        <div class="col-sm-4">
+                                                            <div class="d-flex">
+                                                                <p class="fw-semibold"><i>${dateDiff}</i></p>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-3">
-                                                        <div class="d-grid gap-2">
-                                                            <a href="<?= base_url() . 'applicant'; ?>" class="btn btn-mockup fw-bold text-white rounded-5">Data Pelamar</a>
-                                                            <div class="row justify-content-center">
-                                                                <div class="col-8 d-grid">
-                                                                    <a class="btn btn-secondary fw-bold rounded-5 btn-modal-close" data-bs-toggle="modal" data-id="${id_vacancy}" data-bs-target="#closeModal-${id_vacancy}" type="button" id="btn-confirm-close">Close</a>
-                                                                </div>
-                                                                <!-- Modal Close -->
-                                                                <div class="modal fade closeModal" id="closeModal-${id_vacancy}" tabindex="-1" aria-labelledby="closeModalLabel" aria-hidden="true">
-                                                                    <div class="modal-dialog">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-body">
-                                                                                <div class="row justify-content-between">
-                                                                                    <div class="col-10">
-                                                                                        <h5 class="modal-title fw-bold" id="closeLabel">Yakin Ingin Menutup Lowongan <br>${posisi}?</h5>
-                                                                                    </div>
-                                                                                    <div class="col-1">
-                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="d-grid gap-2">
+                                                        <a href="${base_client}applicant/${id_vacancy}" class="btn btn-mockup fw-bold text-white rounded-5">Data Pelamar</a>
+                                                        <div class="row justify-content-center">
+                                                            <div class="col-8 d-grid">
+                                                                <a class="btn btn-secondary fw-bold rounded-5 btn-modal-close" data-bs-toggle="modal" data-id="${id_vacancy}" data-bs-target="#closeModal-${id_vacancy}" type="button" id="btn-confirm-close">Close</a>
+                                                            </div>
+                                                            <!-- Modal Close -->
+                                                            <div class="modal fade closeModal" id="closeModal-${id_vacancy}" tabindex="-1" aria-labelledby="closeModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-body">
+                                                                            <div class="row justify-content-between">
+                                                                                <div class="col-10">
+                                                                                    <h5 class="modal-title fw-bold" id="closeLabel">Yakin Ingin Menutup Lowongan <br>${posisi}?</h5>
                                                                                 </div>
-                                                                                <div class="d-flex justify-content-end mt-5">
-                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-right: 16px;">Tidak</button>
+                                                                                <div class="col-1">
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="d-flex justify-content-end mt-5">
+                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-right: 16px;">Tidak</button>
 
-                                                                                    <button class="btn btn-danger btn-close-vacancy" data-id=${id_vacancy} data-bs-dismiss="modal">Tutup</button>
-                                                                                </div>
+                                                                                <button class="btn btn-danger btn-close-vacancy" data-id=${id_vacancy} data-bs-dismiss="modal">Tutup</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-4 d-grid">
-                                                                    <button class="btn btn-danger fw-bold rounded-5 btn-modal-delete" data-bs-toggle="modal" data-id="${id_vacancy}" data-bs-target="#deleteModal-${id_vacancy}" type="button"><i class="fa-solid fa-trash"></i></button>
-                                                                </div>
-                                                                <!-- Modal Delete -->
-                                                                <div class="modal fade" id="deleteModal-${id_vacancy}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                                                                    <div class="modal-dialog">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-body">
-                                                                                <div class="row justify-content-between">
-                                                                                    <div class="col-10">
-                                                                                        <h5 class="modal-title fw-bold" id="deleteModalLabel">Yakin Ingin Menghapus Lowongan <br>${posisi}?</h5>
-                                                                                    </div>
-                                                                                    <div class="col-1">
-                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                                    </div>
+                                                            </div>
+                                                            <div class="col-4 d-grid">
+                                                                <button class="btn btn-danger fw-bold rounded-5 btn-modal-delete" data-bs-toggle="modal" data-id="${id_vacancy}" data-bs-target="#deleteModal-${id_vacancy}" type="button"><i class="fa-solid fa-trash"></i></button>
+                                                            </div>
+                                                            <!-- Modal Delete -->
+                                                            <div class="modal fade" id="deleteModal-${id_vacancy}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-body">
+                                                                            <div class="row justify-content-between">
+                                                                                <div class="col-10">
+                                                                                    <h5 class="modal-title fw-bold" id="deleteModalLabel">Yakin Ingin Menghapus Lowongan <br>${posisi}?</h5>
                                                                                 </div>
-                                                                                <div class="d-flex justify-content-end mt-5">
-                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-right: 16px;">Tidak</button>
+                                                                                <div class="col-1">
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="d-flex justify-content-end mt-5">
+                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-right: 16px;">Tidak</button>
 
-                                                                                    <button class="btn btn-danger btn-delete-vacancy" data-id=${id_vacancy} data-bs-dismiss="modal">Hapus</button>
-                                                                                </div>
+                                                                                <button class="btn btn-danger btn-delete-vacancy" data-id=${id_vacancy} data-bs-dismiss="modal">Hapus</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -320,9 +327,10 @@ const LatestVacancy = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row mt-1">
-                                                    <hr>
-                                                </div>
+                                            </div>
+                                            <div class="row mt-1">
+                                                <hr>
+                                            </div>
                                         `
                                         }
 
