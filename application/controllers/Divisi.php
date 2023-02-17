@@ -8,13 +8,21 @@ class Divisi extends CI_Controller
     {
         $data['ajax_url'] = [
             [
+                'src' => 'assets/js/auth/cek-login.js',
+                'type' => 'module'
+            ],
+            [
                 'type' => "module",
                 'src' => 'assets/js/divisi.js'
             ],
             [
                 'type' => "module",
                 'src' => 'assets/js/config.js'
-            ]
+            ],
+            [
+                'src' => 'assets/js/auth/logout.js',
+                'type' => 'module'
+            ],
         ];
 
         $this->load->view('templateAdmin/header');

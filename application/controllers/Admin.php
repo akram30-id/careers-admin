@@ -36,10 +36,6 @@ class Admin extends CI_Controller
                 'src' => 'assets/js/search_vacancy.js',
                 'type' => 'module'
             ],
-            [
-                'src' => 'assets/js/config.js',
-                'type' => 'module'
-            ],
         ];
 
         $this->load->view('templateAdmin/header');
@@ -54,10 +50,6 @@ class Admin extends CI_Controller
                 'src' => 'assets/js/add_vacancy.js',
                 'type' => 'module'
             ],
-            [
-                'src' => 'assets/js/config.js',
-                'type' => 'module'
-            ]
         ];
 
         $nama_divisi = NULL;
@@ -78,10 +70,6 @@ class Admin extends CI_Controller
                 'src' => 'assets/js/update_vacancy.js',
                 'type' => 'module'
             ],
-            [
-                'src' => 'assets/js/config.js',
-                'type' => 'module'
-            ]
         ];
 
         $this->load->view('templateAdmin/header');
@@ -97,15 +85,11 @@ class Admin extends CI_Controller
                 'type' => 'module'
             ],
             [
-                'src' => 'assets/js/config.js',
-                'type' => 'module'
-            ],
-            [
                 'src' => 'assets/js/skeleton-loader/jquery.skeleton.js',
                 'type' => ''
-            ]
+            ],
         ];
-        
+
         $this->load->view('templateAdmin/header');
         $this->load->view('careers/admin/detail', ['id_vacancy' => $idVacancy, 'id_divisi' => $idDivisi]);
         $this->load->view('templateAdmin/footer', $data);
@@ -138,10 +122,6 @@ class Admin extends CI_Controller
                 'src' => 'assets/js/vacancy-divisi/filter_vacancy.js',
                 'type' => 'module'
             ],
-            [
-                'src' => 'assets/js/config.js',
-                'type' => 'module'
-            ]
         ];
 
         $this->load->view('templateAdmin/header');
@@ -151,15 +131,21 @@ class Admin extends CI_Controller
 
     public function tambah_divisi()
     {
+        $data['ajax_url'] = [
+        ];
+
         $this->load->view('templateAdmin/header');
         $this->load->view('careers/admin/tambah_divisi');
-        $this->load->view('templateAdmin/footer');
+        $this->load->view('templateAdmin/footer', $data);
     }
 
     public function tambah_kandidat()
     {
+        $data['ajax_url'] = [
+        ];
+
         $this->load->view('templateAdmin/header');
         $this->load->view('careers/admin/tambah_pelamar');
-        $this->load->view('templateAdmin/footer');
+        $this->load->view('templateAdmin/footer', $data);
     }
 }

@@ -6,7 +6,11 @@ class Applicant extends CI_Controller
 
     public function index($idVacancy)
     {
-        $data['ajax_url'] = [                
+        $data['ajax_url'] = [
+            [
+                'src' => 'assets/js/auth/cek-login.js',
+                'type' => 'module'
+            ],
             [
                 'src' => 'assets/js/applicant/list-applicants.js',
                 'type' => 'module'
@@ -18,7 +22,11 @@ class Applicant extends CI_Controller
             [
                 'src' => 'assets/js/config.js',
                 'type' => 'module'
-            ]
+            ],
+            [
+                'src' => 'assets/js/auth/logout.js',
+                'type' => 'module'
+            ],
         ];
         $this->load->view('templateAdmin/header');
         $this->load->view('careers/admin/pelamar', ['id_vacancy' => $idVacancy]);
@@ -28,6 +36,10 @@ class Applicant extends CI_Controller
     public function tambah_kandidat($idVacancy)
     {
         $data['ajax_url'] = [
+            [
+                'src' => 'assets/js/auth/cek-login.js',
+                'type' => 'module'
+            ],
             [
                 'src' => 'assets/js/applicant/main.js',
                 'type' => 'module'
@@ -39,15 +51,15 @@ class Applicant extends CI_Controller
             [
                 'src' => 'assets/js/config.js',
                 'type' => 'module'
-            ]
+            ],
+            [
+                'src' => 'assets/js/auth/logout.js',
+                'type' => 'module'
+            ],
         ];
 
         $this->load->view('templateAdmin/header');
         $this->load->view('careers/admin/tambah_pelamar', ['id_vacancy' => $idVacancy]);
         $this->load->view('templateAdmin/footer', $data);
-    }
-
-    public function banned()
-    {
     }
 }

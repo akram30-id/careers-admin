@@ -129,10 +129,10 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="modal" data-bs-target="#changePasswordModal" href="#"><i class="fa-solid fa-key"></i> Change Password</a>
+                            <a class="nav-link fw-semibold" data-bs-toggle="modal" data-bs-target="#changePasswordModal" href="#"><i class="fa-solid fa-key"></i> Ganti Password</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-sharp fa-solid fa-power-off"></i> Logout</a>
+                            <a href="#" class="nav-link fw-semibold" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-sharp fa-solid fa-power-off"></i> Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -143,7 +143,7 @@
     <div style="margin-top: 80px;"></div>
 
     <!-- Modal Logout -->
-    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal fade" id="logoutModal" aria-labelledby="logoutModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
@@ -155,21 +155,18 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                     </div>
-                    <div class="row justify-content-end mt-5">
-                        <div class="col-2">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-                        </div>
-                        <div class="col-2">
-                            <a class="btn btn-danger" href="<?= base_url() . 'Authentication/logout'; ?>">Ya</a>
-                        </div>
+                    <div class="d-flex justify-content-end mt-5">
+                        <button type="button" class="btn btn-secondary" style="margin-right: 16px;" data-bs-dismiss="modal">Tidak</button>
+                        <button class="btn btn-danger" id="btn-logout">Logout</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
 
     <!-- Modal Change Password-->
-    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+    <div class="modal fade" id="changePasswordModal" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
@@ -181,21 +178,29 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                     </div>
-                    <form action="" method="POST">
-                        <div class="mb-4">
-                            <label for="passwordBaru" class="form-label fw-bold">Password Baru</label>
-                            <input type="password" class="form-control" name="passwordBaru" id="passwordBaru">
+                    <label for="old-password" class="form-label fs-4 fw-semibold">Password Lama</label>
+                    <div class="input-group mb-4">
+                        <input type="password" class="form-control" id="old-password" name="old-password" style="font-style: italic;" aria-describedby="btn-pwd-old-visible">
+                        <button class="btn btn-outline-warning" id="btn-pwd-old-visible"><i class="bi bi-eye"></i></button>
+                    </div>
+
+                    <label for="new-password" class="form-label fs-4 fw-semibold">Password Baru</label>
+                    <div class="input-group mb-4">
+                        <input type="password" class="form-control" id="new-password" name="new-password" style="font-style: italic;" aria-describedby="btn-pwd-new-visible">
+                        <button class="btn btn-outline-warning" id="btn-pwd-new-visible"><i class="bi bi-eye"></i></button>
+                    </div>
+
+                    <label for="confirm-password" class="form-label fs-4 fw-semibold">Password Baru</label>
+                    <div class="input-group mb-4">
+                        <input type="password" class="form-control" id="confirm-password" name="confirm-password" style="font-style: italic;" aria-describedby="btn-pwd-confirm-visible">
+                        <button class="btn btn-outline-warning" id="btn-pwd-confirm-visible"><i class="bi bi-eye"></i></button>
+                    </div>
+
+                    <div class="my-3">
+                        <div class="d-grid gap-3">
+                            <button class="btn btn-warning fw-semibold rounded-5" id="btn-change-password" data-bs-dismiss="modal">Ganti Password</button>
                         </div>
-                        <div class="mb-3">
-                            <label for="confirmPassword" class="form-label fw-bold">Konfirmasi Password</label>
-                            <input type="password" class="form-control" name="confirmPassword" id="confirmPassword">
-                        </div>
-                        <div class="my-3">
-                            <div class="d-grid gap-3">
-                                <button class="btn btn-warning fw-semibold rounded-5" type="submit">Ganti Password</button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

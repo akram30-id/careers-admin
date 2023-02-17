@@ -55,6 +55,12 @@
     })
 </script>
 
+<script type="module" src=<?= BASE_URL() . "assets/js/config.js" ?>></script>
+
+<script type="module" src=<?= BASE_URL() . "assets/js/auth/cek-login.js" ?>></script>
+<script type="module" src=<?= BASE_URL() . "assets/js/auth/logout.js" ?>></script>
+<script type="module" src=<?= BASE_URL() . "assets/js/auth/change-password.js" ?>></script>
+
 <?php if (isset($ajax_url)) {
     foreach ($ajax_url as $ajax) {
 ?>
