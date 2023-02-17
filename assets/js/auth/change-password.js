@@ -37,16 +37,16 @@ $(document).ready(function () {
 
     const visible = (pwd) => {
         $(`#${pwd}-password`).prop("type", "text")
-        $(this).html("")
-        $(this).html(`<i class="bi bi-eye-slash"></i>`)
-        $(this).prop("class", "btn btn-warning")
+        $(`#btn-pwd-${pwd}-visible`).html("")
+        $(`#btn-pwd-${pwd}-visible`).html(`<i class="bi bi-eye-slash"></i>`)
+        $(`#btn-pwd-${pwd}-visible`).prop("class", "btn btn-warning")
     }
 
     const invisible = (pwd) => {
         $(`#${pwd}-password`).prop("type", "password")
-        $(this).html("")
-        $(this).html(`<i class="bi bi-eye"></i>`)
-        $(this).prop("class", "btn btn-outline-warning")
+        $(`#btn-pwd-${pwd}-visible`).html("")
+        $(`#btn-pwd-${pwd}-visible`).html(`<i class="bi bi-eye"></i>`)
+        $(`#btn-pwd-${pwd}-visible`).prop("class", "btn btn-outline-warning")
     }
 
     $("#btn-pwd-old-visible").on("click", function (event) {
